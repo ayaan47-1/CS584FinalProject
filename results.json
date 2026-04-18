@@ -1,106 +1,28 @@
 {
-  "ETTh1_PatchTST_h96": {
-    "mse": 9.7062,
-    "mae": 1.7241
-  },
-  "ETTh1_DLinear_h96": {
-    "mse": 9.2836,
-    "mae": 1.6299
-  },
-  "ETTh1_PatchTST_h192": {
-    "mse": 10.1862,
-    "mae": 1.7868
-  },
-  "ETTh1_DLinear_h192": {
-    "mse": 10.2419,
-    "mae": 1.7618
-  },
-  "ETTh1_PatchTST_h336": {
-    "mse": 11.1832,
-    "mae": 1.9391
-  },
-  "ETTh1_DLinear_h336": {
-    "mse": 10.8656,
-    "mae": 1.8693
-  },
-  "ETTh1_PatchTST_h720": {
-    "mse": 12.3044,
-    "mae": 2.1299
-  },
-  "ETTh1_DLinear_h720": {
-    "mse": 12.323,
-    "mae": 2.1047
-  },
-  "ETTh2_PatchTST_h96": {
-    "mse": 17.7601,
-    "mae": 2.7967
-  },
-  "ETTh2_DLinear_h96": {
-    "mse": 15.4995,
-    "mae": 2.5231
-  },
-  "ETTh2_PatchTST_h192": {
-    "mse": 21.3991,
-    "mae": 3.1102
-  },
-  "ETTh2_DLinear_h192": {
-    "mse": 18.886,
-    "mae": 2.8594
-  },
-  "ETTh2_PatchTST_h336": {
-    "mse": 23.7594,
-    "mae": 3.3681
-  },
-  "ETTh2_DLinear_h336": {
-    "mse": 22.3819,
-    "mae": 3.1912
-  },
-  "ETTh2_PatchTST_h720": {
-    "mse": 32.0464,
-    "mae": 3.992
-  },
-  "ETTh2_DLinear_h720": {
-    "mse": 31.3105,
-    "mae": 3.9324
-  },
-  "ablation_patch_len_8": {
-    "mse": 9.5096,
-    "mae": 1.7027
-  },
-  "ablation_patch_len_16": {
-    "mse": 9.4647,
-    "mae": 1.7445
-  },
-  "ablation_patch_len_32": {
-    "mse": 9.3253,
-    "mae": 1.7094
-  },
-  "ablation_stride_4": {
-    "mse": 9.3452,
-    "mae": 1.6945
-  },
-  "ablation_stride_8": {
-    "mse": 9.4392,
-    "mae": 1.7037
-  },
-  "ablation_stride_16": {
-    "mse": 9.2713,
-    "mae": 1.6865
-  },
-  "ablation_seq_len_96": {
-    "mse": 9.4117,
-    "mae": 1.6863
-  },
-  "ablation_seq_len_192": {
-    "mse": 9.396,
-    "mae": 1.6822
-  },
-  "ablation_seq_len_336": {
-    "mse": 9.3336,
-    "mae": 1.6969
-  },
-  "ablation_seq_len_512": {
-    "mse": 9.2369,
-    "mae": 1.682
-  }
+  "ETTh1_PatchTST_h96": {"mse": 0.4524, "mae": 0.4583, "orig_mse": 9.3413, "orig_mae": 1.6967},
+  "ETTh1_DLinear_h96":  {"mse": 0.4457, "mae": 0.4428, "orig_mse": 9.3298, "orig_mae": 1.6404},
+  "ETTh1_PatchTST_h192": {"mse": 0.5087, "mae": 0.4974, "orig_mse": 10.5518, "orig_mae": 1.8529},
+  "ETTh1_DLinear_h192":  {"mse": 0.4908, "mae": 0.472,  "orig_mse": 10.1966, "orig_mae": 1.749},
+  "ETTh1_PatchTST_h336": {"mse": 0.5472, "mae": 0.5214, "orig_mse": 11.0781, "orig_mae": 1.9262},
+  "ETTh1_DLinear_h336":  {"mse": 0.544,  "mae": 0.511,  "orig_mse": 10.8707, "orig_mae": 1.8724},
+  "ETTh1_PatchTST_h720": {"mse": 0.6525, "mae": 0.5875, "orig_mse": 12.3392, "orig_mae": 2.1334},
+  "ETTh1_DLinear_h720":  {"mse": 0.6393, "mae": 0.5779, "orig_mse": 12.4727, "orig_mae": 2.1169},
+  "ETTh2_PatchTST_h96":  {"mse": 0.2574, "mae": 0.3487, "orig_mse": 17.0193, "orig_mae": 2.6913},
+  "ETTh2_DLinear_h96":   {"mse": 0.2374, "mae": 0.3288, "orig_mse": 15.5331, "orig_mae": 2.5216},
+  "ETTh2_PatchTST_h192": {"mse": 0.3452, "mae": 0.4154, "orig_mse": 20.9499, "orig_mae": 3.1021},
+  "ETTh2_DLinear_h192":  {"mse": 0.3042, "mae": 0.3798, "orig_mse": 18.9635, "orig_mae": 2.8664},
+  "ETTh2_PatchTST_h336": {"mse": 0.4212, "mae": 0.4631, "orig_mse": 24.9747, "orig_mae": 3.4388},
+  "ETTh2_DLinear_h336":  {"mse": 0.3776, "mae": 0.4294, "orig_mse": 22.4223, "orig_mae": 3.1933},
+  "ETTh2_PatchTST_h720": {"mse": 0.6183, "mae": 0.5554, "orig_mse": 31.9732, "orig_mae": 3.9904},
+  "ETTh2_DLinear_h720":  {"mse": 0.5957, "mae": 0.5465, "orig_mse": 31.3236, "orig_mae": 3.9372},
+  "ablation_patch_len_8":  {"mse": 0.4464, "mae": 0.4523, "orig_mse": 9.2009, "orig_mae": 1.6693},
+  "ablation_patch_len_16": {"mse": 0.4602, "mae": 0.4642, "orig_mse": 9.4436, "orig_mae": 1.714},
+  "ablation_patch_len_32": {"mse": 0.452,  "mae": 0.4564, "orig_mse": 9.2507, "orig_mae": 1.6775},
+  "ablation_stride_4":  {"mse": 0.4593, "mae": 0.4621, "orig_mse": 9.4109, "orig_mae": 1.7032},
+  "ablation_stride_8":  {"mse": 0.4598, "mae": 0.4662, "orig_mse": 9.2744, "orig_mae": 1.7107},
+  "ablation_stride_16": {"mse": 0.4505, "mae": 0.4567, "orig_mse": 9.2123, "orig_mae": 1.6844},
+  "ablation_seq_len_96":  {"mse": 0.4525, "mae": 0.4542, "orig_mse": 9.2145, "orig_mae": 1.6653},
+  "ablation_seq_len_192": {"mse": 0.446,  "mae": 0.4529, "orig_mse": 9.2207, "orig_mae": 1.67},
+  "ablation_seq_len_336": {"mse": 0.4539, "mae": 0.4614, "orig_mse": 9.2779, "orig_mae": 1.7025},
+  "ablation_seq_len_512": {"mse": 0.4547, "mae": 0.4619, "orig_mse": 9.3731, "orig_mae": 1.7131}
 }
