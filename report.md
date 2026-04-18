@@ -158,7 +158,7 @@ All metrics are computed in the z-score normalized space (same scale as the pape
 | 336     | 0.5472         | 0.422           | +30%      | 0.5440         | 0.481          |
 | 720     | 0.6525         | 0.447           | +46%      | 0.6393         | 0.456          |
 
-Our implementation is systematically higher than the paper, and the gap grows with forecast horizon. This is a consistent pattern rather than noise: the longer the horizon, the more distributional shift matters, and the more RevIN would help. Notably, our DLinear implementation is also above the paper's DLinear values by similar margins (~15–40%), suggesting a common cause — likely our global scaler versus the instance-level normalization strategy employed in those comparisons.
+Our PatchTST MSE is 22–46% higher than the paper's (higher MSE = worse performance). The gap grows with forecast horizon: +22% at h=96, +46% at h=720. Importantly, our DLinear is also 15–40% worse than the published DLinear numbers — by nearly the same margin. Since DLinear has almost no code to get wrong, a shared upstream cause is likely responsible. The most probable explanation is normalization: the paper uses Reversible Instance Normalization (RevIN), which re-centers each look-back window at inference time. We use a global `StandardScaler` fit once on training data. As the test period drifts away from the training distribution — which worsens at longer horizons — the global scaler becomes an increasingly poor approximation, degrading both models equally.
 
 ### 4.2 Discussion
 
