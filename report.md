@@ -110,13 +110,31 @@ seasonal = x − trend
 
 Two separate linear layers map each component to the forecast horizon. Like PatchTST, DLinear is applied channel-independently. Despite containing no attention mechanism or non-linearity, DLinear serves as a strong and interpretable baseline.
 
-### 3.7 Training Protocol
+### 3.7 Reversible Instance Normalization (RevIN)
+
+RevIN (Kim et al., 2022) wraps the entire model with per-instance normalization. At the start of each forward pass, the mean and standard deviation of the input look-back window are computed along the time axis and cached:
+
+```
+mean = x.mean(dim=time)          # (B, 1, C)
+std  = x.std(dim=time)           # (B, 1, C)
+x_norm = (x − mean) / std        # instance-normalized input
+```
+
+The Transformer then operates on `x_norm`, which is always zero-mean and unit-variance regardless of the absolute level of the original series. After the prediction head, the output is denormalized using the same cached statistics:
+
+```
+ŷ = ŷ_norm × std + mean          # recover original scale
+```
+
+Learnable per-channel affine parameters (γ, β) are applied after normalization and removed before denormalization, allowing the model to learn a useful internal scale without losing the ability to reconstruct the original. RevIN makes the model invariant to the absolute level and variance of each window — the key property that allows it to generalize across distributional shift between train and test periods.
+
+### 3.8 Training Protocol
 
 **Data.** ETTh1 and ETTh2 are hourly electricity transformer recordings with 7 features each (6 power load measurements + oil temperature). We follow the standard split: 12 months train / 4 months validation / 4 months test. Features are standardized per-channel using a `StandardScaler` fit exclusively on training data — no information from validation or test sets leaks into the normalization.
 
-**Optimization.** Adam optimizer with `lr=1e-4`, MSE loss, batch size 128. Early stopping with patience=10 epochs monitors validation MSE. Maximum 100 epochs per run.
+**Optimization.** Adam optimizer, initial `lr=1e-4`, MSE loss, batch size 128. Learning rate follows a cosine annealing schedule (decaying to 1e-6 over `n_epochs`). Early stopping with patience=10 monitors validation MSE; maximum 100 epochs per run.
 
-**Evaluation.** Predictions and targets are inverse-transformed back to the original scale before computing MSE and MAE, enabling comparison across differently scaled features.
+**Evaluation.** MSE and MAE are computed in the z-score normalized space — the same scale as training and validation losses. This matches the evaluation protocol in the original paper and enables direct comparison with published Table 1 results.
 
 **Hardware.** All experiments run on Apple M4 Pro (24 GB unified memory) using PyTorch's MPS backend, achieving approximately 8 seconds per epoch on ETTh1.
 
@@ -141,7 +159,7 @@ We report three model configurations: PatchTST without RevIN (baseline), PatchTS
 | ETTh2   | 336     | 0.4212   | **0.3518**     | 0.3776  | **PatchTST+RevIN** |
 | ETTh2   | 720     | 0.6183   | **0.4578**     | 0.5957  | **PatchTST+RevIN** |
 
-**ETTh1 analysis.** On ETTh1, DLinear wins all four horizons for both PatchTST configurations. RevIN provides a small improvement at h=96 and h=192 (2–2%), but is slightly harmful at h=336 and h=720. ETTh1 is a relatively stationary dataset — the statistical properties of the training period generalize reasonably to the test period — so per-instance normalization provides little signal and introduces noise at longer horizons where the prediction must be denormalized using look-back window statistics that may not match the forecast period.
+**ETTh1 analysis.** On ETTh1, DLinear wins all four horizons for both PatchTST configurations. RevIN provides a small improvement at h=96 and h=192 (3% and 2% respectively), but is slightly harmful at h=336 and h=720. ETTh1 is a relatively stationary dataset — the statistical properties of the training period generalize reasonably to the test period — so per-instance normalization provides little signal and introduces noise at longer horizons where the prediction must be denormalized using look-back window statistics that may not match the forecast period.
 
 **ETTh2 analysis.** RevIN's impact on ETTh2 is dramatic and grows with forecast horizon. At h=192, PatchTST+RevIN beats DLinear by 1.7%. At h=336, by 6.8%. At h=720, by **23%**. ETTh2 exhibits stronger distributional shift between train and test periods — oil temperature and power load patterns change more across the dataset's time span — and RevIN directly addresses this by normalizing each look-back window to zero mean and unit variance at inference time, regardless of its absolute level.
 
