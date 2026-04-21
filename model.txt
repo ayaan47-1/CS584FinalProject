@@ -1,0 +1,12 @@
+Saved model files:
+
+No persistent model checkpoints are included with this submission. All experiments
+are reproducible by running the cells of src/patchtst.ipynb in order. Training
+results are cached to results.json after each run, allowing the notebook to skip
+re-training completed experiments on subsequent kernel sessions.
+
+Each model takes approximately 8 seconds per epoch on Apple M4 Pro (MPS backend),
+with early stopping (patience=10) typically terminating between 20–40 epochs. A
+full reproduction of all main results and ablations completes in roughly 30 minutes.
+
+To re-train from scratch, delete results.json before running the notebook.

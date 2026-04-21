@@ -1,0 +1,14 @@
+Datasets used in this project:
+
+ETT (Electricity Transformer Temperature) datasets — ETTh1 and ETTh2
+Source: https://github.com/zhouhaoyi/ETDataset
+Direct download links:
+  ETTh1: https://github.com/zhouhaoyi/ETDataset/raw/main/ETT-small/ETTh1.csv
+  ETTh2: https://github.com/zhouhaoyi/ETDataset/raw/main/ETT-small/ETTh2.csv
+
+Files are included in the data/ folder of this submission (each ~2.5 MB, well under the 10MB limit).
+
+Citation:
+H. Zhou, S. Zhang, J. Peng, S. Zhang, J. Li, H. Xiong, and W. Zhang,
+"Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting,"
+AAAI, 2021.
